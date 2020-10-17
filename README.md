@@ -2,6 +2,9 @@
 Authors: Peter Gruber and Paolo Montemurro - montep@usi.ch, started
 2020-10-09, this version 2002-10-14
 
+## V1.2
+Handling of lines that produces error on submission code. in V1.1 it was stopping the tests and giving 0 points, now it ignores the errors and proceeds with the tests.
+
 ## Folder structure
 ```
 gradescope_assignment/
