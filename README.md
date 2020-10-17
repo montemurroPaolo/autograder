@@ -1,5 +1,5 @@
 ## Documentation - Gradescope Auto-Grader
-Authors: Peter Gruber and Paolo Montemurro - montep@usi.ch, started 2020-10-09, this version 2020-10-17
+Authors: Peter Gruber (peter.gruber@usi.ch) and Paolo Montemurro (montep@usi.ch) started 2020-10-09.
 
 ## Versions:
 #### V 1.2
@@ -60,13 +60,12 @@ gradescope_assignment/
 
 ## File conventions
 ### config.txt conventions
-- First line shall be ""# name_assignment.R".
+- First line shall be "# name_assignment.R".
 - Each line that starts with "#" or with spaces and "#" will NOT be considered
 - Empty lines will not be considered
 
 ### How to write a test in config.txt
-- Enclose tests with `---`
-- No need to type 2 times `---` between tests
+- Enclose tests with `---`, no need to type 2 times `---` between tests
 - Row [1] **required**: title of the test (no "" needed). Same naming between tests is permitted.
 	- Use `@` sign before name for testing code content. 
 		- With this option, the first argument in the   (`expect_equal(...)`,...) function will be replaced by the number of its occurences. 
