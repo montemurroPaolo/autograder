@@ -21,7 +21,6 @@ gradescope_assignment/
 |	├── config.txt
 |	├── grader.R
 |	├── parse_txt.R
-|	├── readme.md
 |	├── run_autograder
 |	├── setup.sh
 |	├── solution.R
@@ -43,8 +42,7 @@ gradescope_assignment/
 - `run_autograder`**(required)**: load the student submission in the grader
 - `setup.sh` **(required)**: install the required packages in the installation
 - `solution.R` **(optional)**: solution of the assignment. **Must** have different variable naming than submission. Use "\_sol" after each variable/function to distinguish.
-- `functions.R` **(required)**: functions called by the different scripts
-- `readme.md` **(optional)**: this guide. 
+- `functions.R` **(required)**: functions called by the different scripts 
 - `tests.R` **(required)**: run the tests with testthat package
 
 ### Content of incorrect_solutions
