@@ -1,4 +1,4 @@
-## Documentation - Gradescope Auto-Grader
+## Gradescope Auto-Grader
 Authors: Peter Gruber (peter.gruber@usi.ch) and Paolo Montemurro (montep@usi.ch) started 2020-10-09.
 
 ## Versions:
