@@ -1,9 +1,18 @@
 ## Documentation - Gradescope Auto-Grader
-Authors: Peter Gruber and Paolo Montemurro - montep@usi.ch, started
-2020-10-09, this version 2002-10-14
+Authors: Peter Gruber and Paolo Montemurro - montep@usi.ch, started 2020-10-09, this version 2020-10-17
 
-## V1.2
+## Versions:
+#### V 1.2
 Handling of lines that produces error on submission code. in V1.1 it was stopping the tests and giving 0 points, now it ignores the errors and proceeds with the tests.
+
+#### V 1.1
+-	You can start a line with a space (or more) and then a comment
+-	In the config.txt file, you can comment directly on the code line, and the first row is the assignment file name (assignment02.R)
+-	Created the Parser function used both for config.txt and the submission
+-	Created standard variables for submissions: code_length and first_row
+
+#### V1.0
+Autograder with config.txt file
 
 ## Folder structure
 ```
