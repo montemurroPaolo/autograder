@@ -1,0 +1,49 @@
+# assignment02.R
+# Peter Gruber, 2020-10-13
+# Programming in Finance I
+# Problem Set 02
+
+---
+@ All Functions
+expect_equal("return", 3) # delete this
+25
+Each function should have one return() command
+Good: Your functions correctly each have a return() command
+---
+Ex 1 - BadFn
+expect_equal(badFn(5),badFn_sol(5),tolerance=1E-9)
+10
+Incorrect value for badFn(5)
+---
+Ex 1 - BadFn
+expect_equal(badFn(-5),badFn_sol(-5),tolerance=1E-9)
+10
+Incorrect value for badFn(-5)
+---
+Ex 2 Black Scholes
+expect_equal( blackScholesCall(100,90,1,0.0,0.2), blackScholesCall_sol(100,90,1,0.0,0.2), tolerance=1E-9 )
+20
+Your Black Scholes function produces incorrect results when r=0
+Good: Your Black Scholes function produces correct results when r=0
+---
+Ex 2 Black Scholes
+expect_equal( blackScholesCall(100,90,1,0.1,0.2), blackScholesCall_sol(100,90,1,0.1,0.2), tolerance=1E-9 )
+20
+Your Black Scholes function produces incorrect results when r>0
+Good: Your Black Scholes function produces correct results when r>0
+---
+Ex 3
+expect_equal( dcinterest(0.1,4), dcinterest_sol(0.1,4), tolerance=1E-9 )
+15
+Your dcinterest produces incorrect values for a duration of 4 years
+---
+#Ex 3
+#expect_equal( dcinterest(0.08,6.5), dcinterest_sol(0.08,6.5), tolerance=1E-9 )
+#25
+#Your dcinterest produces incorrect values for a duration of 6.5 years
+#---
+#Ex 3
+#!expect_equal( dcinterest(0.1,3.5), dcinterest_simple(0.1,3.5), tolerance=1E-9 )
+#25
+#Your dcinterest treats fractional years (e.g. 6.5 years) in a too simple way. You need to distinguish whole years from fractional years and treat them differently.
+#---
