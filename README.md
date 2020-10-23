@@ -3,8 +3,8 @@ Authors: Peter Gruber (peter.gruber@usi.ch) and Paolo Montemurro (montep@usi.ch)
 
 ## Versions:
 
-### V 1.5
-- Different output for different errors:
+#### V 1.5
+- **Different output for different errors**:
 	- COMPILING: The grader outputs the code of the line that contains an error, and the R message
 	- NAMING: The grader recognizeS if the variable is not present and outputs a standardized message 
 	- EVALUATION: The grader provides user-generated or R-generated feedback.
