@@ -27,3 +27,15 @@ Parser <- function(text="config.txt"){
   
   return(list(my_text, no_comments, len_text, first_row))
 }
+
+
+output_0_grade <- function(test_name, msge, sep){
+  tests <- list()
+  tests[["tests"]][[1]] <- list(name = test_name,
+                                score = 0,
+                                max_score = 100,
+                                visibility = "visible",
+                                output = msge)
+  json_filename <- paste0("..",sep,"results",sep,"results.json")
+  write(jsonlite::toJSON(tests, auto_unbox = T), file = json_filename)
+}

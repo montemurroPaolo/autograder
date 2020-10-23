@@ -26,34 +26,35 @@ solution_file   <- "solution.R"
 # function
 calcGradesForGradescope <- function(submission_file, my_test_file, debug=FALSE){
 
-  if(missing(my_test_file)) 
-    stop("Must have a test file")
+  if(missing(my_test_file)){stop("Must have a test file")} # Check test file
   
-  if(!file.exists(submission_file)) 
-  {
+  if(!file.exists(submission_file)) { # Check file naming
     my_cmd <- paste0("ls ..",.Platform$file.sep,"submission")
     student_filename <- system(my_cmd,intern = TRUE)
-    tests <- list()
-    tests[["tests"]][[1]] <- list(name = "Correct file name",
-                                  score = 0,
-                                  max_score = 100,
-                                  visibility = "visible",
-                                  output = paste0('Your submission cannot be evaluated, because it has an incorrect file name. The file you have submitted is called "' ,student_filename,'".')
-                                  )
-    json_filename <- paste0("..",.Platform$file.sep,"results",.Platform$file.sep,"results.json")
-    
-    # now write out all the stuff to a json file
-    write(jsonlite::toJSON(tests, auto_unbox = T), file = json_filename)
-  } else
-  {    
+    wrong_name_msg = paste0('Your submission cannot be evaluated, because it has an incorrect file name. The file you have submitted is called "' ,student_filename,'".')
+    output_0_grade("Correct file name", wrong_name_msg, .Platform$file.sep)
+    stop("Wrong filename. results written")
+  }
 
-  if(n_tests == 0)
-    stop("you need at least one graded question")
+  if(n_tests == 0){stop("you need at least one graded question")} # Check questions
   
   testEnv <- new.env() # run student's submission in a separate environment
   
   #tryCatch(source(submission_file, testEnv),  error = function(c) c, warning = function(c) c ,message = function(c) c)
-  replay(evaluate(file(submission_file))) # Run the program of the student line by line. Student can make errors.
+  replay(evaluate(file(submission_file))) # Run the program of the student line by line. Student can make errors. https://stackoverflow.com/questions/14612190/is-there-a-way-to-source-and-continue-after-an-error
+  
+  line_by_line   <- evaluate(file(submission_file))
+  errors_bool    <- grepl("error", sapply(line_by_line, class))
+  errors         <- line_by_line[errors_bool]
+  #warnings_bool  <- grepl("warning", sapply(line_by_line, class))
+  #warnings <- replay(line_by_line[warnings_bool])
+  
+  if(length(errors)>0){ #if there is any error...
+    format_errors  <- ""
+    for(i in 1:length(errors)){ format_errors <- paste0(format_errors, errors[[i]]) } # Output errors
+    output_0_grade("Code produces errors", format_errors, sep=.Platform$file.sep)
+    stop("Code produces errors. results written")
+  }
   
   # source solution, if exists
   if(file.exists(solution_file)){source(solution_file)}
@@ -85,7 +86,7 @@ calcGradesForGradescope <- function(submission_file, my_test_file, debug=FALSE){
   
   # test the student's submissions
   lr               <- ListReporter$new()                                      ### Original code
-  out              <- test_file(my_test_file, reporter=lr,  env = testEnv)                 ### Original code
+  out              <- test_file(my_test_file, reporter=lr,  env = testEnv)    ### Original code
   tests            <- list()                                                  ### Original code  
   tests[["tests"]] <- list()                                                  ### Original code
   raw_results      <- lr$results$as_list()                                    
@@ -106,11 +107,18 @@ calcGradesForGradescope <- function(submission_file, my_test_file, debug=FALSE){
     # Paste messages...
     if(test_score != test_max_score){
       
-      # Paste user-defined errors
-      if(ex[4]!=""){
-        msg <- paste0(ex[4], "\n")}else{
-          msg <- paste0("R reports the following error(s): \n",raw_results[[i]][["results"]][[1]][["message"]])
+      R_error <- raw_results[[i]][["results"]][[1]][["message"]]
+      
+      if(grepl("could not find|not found",R_error)){ # Paste naming error (based on R error message). Could increase the error naming list
+        msg <- "Your environment doesn't contain the variable requested. Check your naming."
+      }else{ # If the variable is present...
+        if(ex[4]!=""){ # Paste user-defined errors if specified
+          msg <- paste0(ex[4], "\n")
+        }else{ # Paste R pre-defined errors otherwise
+          msg <- paste0("R reports the following error(s): \n",R_error)
         }
+      }
+      
       
       # Paste correct result
     }else{
@@ -136,7 +144,6 @@ calcGradesForGradescope <- function(submission_file, my_test_file, debug=FALSE){
   write(jsonlite::toJSON(tests, auto_unbox = T), file = json_filename)
 
 }
-}  # end of if ... wrong file
 
 calcGradesForGradescope(submission_file, my_test_file) 
   

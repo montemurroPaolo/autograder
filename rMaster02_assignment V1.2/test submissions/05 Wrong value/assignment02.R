@@ -9,7 +9,7 @@ badFn <- function(x)
 # USAGE   badFn(x) 
 # peter.gruber@usi.ch, 2011-09-01
     {
-    y <- x^2
+    y <- x^3
     return(y)
     }
 

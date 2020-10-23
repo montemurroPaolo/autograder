@@ -9,10 +9,11 @@ badFn <- function(x)
 # USAGE   badFn(x) 
 # peter.gruber@usi.ch, 2011-09-01
     {
-    y <- x^2
+    y <- x^3
     return(y)
     }
 
+return <-3
 blackScholesCall <- function (S,K,t,r,sigma)
 # blackScholes Price of a call option according to Black-Scholes
 # INPUT     S ... scalar ... price of the stock
@@ -32,7 +33,7 @@ blackScholesCall <- function (S,K,t,r,sigma)
     }
 
 
-dcinterest <- function(r,t) 
+dPinterest <- function(r,t) 
 # Calculates the discretely compounded interest on 1 Euro. 
 # INPUT	  r	1x1 .. interest rate [fractions of 1]
 #         t	1x1 .. duration in yrs

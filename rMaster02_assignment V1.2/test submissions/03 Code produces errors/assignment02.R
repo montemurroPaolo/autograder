@@ -13,6 +13,7 @@ badFn <- function(x)
     return(y)
     }
 
+pnorm()
 blackScholesCall <- function (S,K,t,r,sigma)
 # blackScholes Price of a call option according to Black-Scholes
 # INPUT     S ... scalar ... price of the stock
@@ -30,7 +31,7 @@ blackScholesCall <- function (S,K,t,r,sigma)
     BSC <- S*pnorm(d1) - exp(-r*t)*K*pnorm(d2)
     return(BSC)   # Do not forget return()
     }
-
+a
 
 dcinterest <- function(r,t) 
 # Calculates the discretely compounded interest on 1 Euro. 
@@ -47,4 +48,4 @@ dcinterest <- function(r,t)
     return(y)
 }
 
-
+print(y)

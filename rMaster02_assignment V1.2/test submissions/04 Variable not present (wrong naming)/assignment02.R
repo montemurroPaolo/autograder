@@ -32,7 +32,7 @@ blackScholesCall <- function (S,K,t,r,sigma)
     }
 
 
-dcinterest <- function(r,t) 
+DCinterest <- function(r,t) 
 # Calculates the discretely compounded interest on 1 Euro. 
 # INPUT	  r	1x1 .. interest rate [fractions of 1]
 #         t	1x1 .. duration in yrs

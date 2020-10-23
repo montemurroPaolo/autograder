@@ -13,6 +13,8 @@ badFn <- function(x)
     return(y)
     }
 
+return <- 4
+
 blackScholesCall <- function (S,K,t,r,sigma)
 # blackScholes Price of a call option according to Black-Scholes
 # INPUT     S ... scalar ... price of the stock
