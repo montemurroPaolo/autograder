@@ -5,9 +5,9 @@ Authors: Peter Gruber (peter.gruber@usi.ch) and Paolo Montemurro (montep@usi.ch)
 
 ### V 1.5
 - Different output for different errors:
-	- COMPILING: If the code produces an error while compiling, the grade is 0, and the error is printed on gradescope.
-	- NAMING: if the grader can't find the variable to grade in the student's environment, will output a message
-	- VALUE: the numeric result error remains unchanged.
+	- COMPILING: The grader outputs the code of the line that contains an error, and the R message
+	- NAMING: The grader recognizeS if the variable is not present and outputs a standardized message 
+	- EVALUATION: The grader provides user-generated or R-generated feedback.
 - Created the function return_0_grade
 - 7 tests made. Stored in folder test submissions
 
@@ -94,8 +94,8 @@ gradescope_assignment/
 	- Individual positive feedback is especially useful if you run two or more tests against one task.
 
 ### Handling different errors
-- COMPILING: The grader outputs the code of the line that contains an error, and the R message
-- NAMING: The grader recognize if the variable is not present and outputs a standardized message 
+- COMPILING: The grader outputs the code of the line that contains an error, and the R message.
+- NAMING: The grader recognizeS if the variable is not present and outputs a standardized message 
 - EVALUATION: The grader provides user-generated or R-generated feedback.
 
 
