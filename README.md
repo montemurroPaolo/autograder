@@ -2,6 +2,15 @@
 Authors: Peter Gruber (peter.gruber@usi.ch) and Paolo Montemurro (montep@usi.ch) started 2020-10-09.
 
 ## Versions:
+
+### V 1.5
+- Different output for different errors:
+	- COMPILING: If the code produces an error while compiling, the grade is 0, and the error is printed on gradescope.
+	- NAMING: if the grader can't find the variable to grade in the student's environment, will output a message
+	- VALUE: the numeric result error remains unchanged.
+- Created the function return_0_grade
+- 7 tests made. Stored in folder test submissions
+
 #### V 1.2
 Handling of lines that produces error on submission code. in V1.1 it was stopping the tests and giving 0 points, now it ignores the errors and proceeds with the tests.
 
@@ -60,14 +69,15 @@ gradescope_assignment/
 
 ## File conventions
 ### config.txt conventions
-- First line shall be "# name_assignment.R".
-- Each line that starts with "#" or with spaces and "#" will NOT be considered
+- First line shall be "# name_assignment.R", which is equal to the student submission naming.
+- Each line that starts with "#" or with spaces and "#" will NOT be considered.
+- You can comment on the same line of the instructions.
 - Empty lines will not be considered
 
 ### How to write a test in config.txt
 - Enclose tests with `---`, no need to type 2 times `---` between tests
 - Row [1] **required**: title of the test (no "" needed). Same naming between tests is permitted.
-	- Use `@` sign before name for testing code content. 
+	- Use `@` sign before name for testing code content (parsing) 
 		- With this option, the first argument in the   (`expect_equal(...)`,...) function will be replaced by the number of its occurences. 
 		- *Example* `expect_equal("return",3)` is `TRUE`, if the student code contains exactly three times the keyword `return`.
 		- *Note* keywords in comments do not count, in the above example `# Do not forget the return()` would (correctly) not count.
@@ -82,6 +92,12 @@ gradescope_assignment/
 - Row [5] **optional** positive (correct) feedback. If no feedback is provided, the message *Congratulations, the answer is correct!* will be displayed. 
 	- Individual positive feedback currently only works if also individual negative feedback has been provided. 
 	- Individual positive feedback is especially useful if you run two or more tests against one task.
+
+### Handling different errors
+- COMPILING: The grader outputs the code of the line that contains an error, and the R message
+- NAMING: The grader recognize if the variable is not present and outputs a standardized message 
+- EVALUATION: The grader provides user-generated or R-generated feedback.
+
 
 ### Checklist
 - Set correct submission filename in `grader.R`
