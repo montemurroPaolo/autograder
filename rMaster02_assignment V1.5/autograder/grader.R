@@ -110,7 +110,7 @@ calcGradesForGradescope <- function(submission_file, my_test_file, debug=FALSE){
       R_error <- raw_results[[i]][["results"]][[1]][["message"]]
       
       if(grepl("could not find|not found",R_error)){ # Paste naming error (based on R error message). Could increase the error naming list
-        msg <- "Your environment doesn't contain the variable requested. Check your naming."
+        msg <- "Your environment doesn't contain the variable/function requested. Check your naming."
       }else{ # If the variable is present...
         if(ex[4]!=""){ # Paste user-defined errors if specified
           msg <- paste0(ex[4], "\n")
