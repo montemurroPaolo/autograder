@@ -70,24 +70,24 @@ gradescope_assignment/
 ## File conventions
 ### config.txt conventions
 - First line shall be "# name_assignment.R", which is equal to the student submission naming.
-- Each line that starts with "#" or with spaces and "#" will NOT be considered.
+- Each line that starts with "#" or with spaces and "#", except from the first line, will NOT be considered.
 - You can comment on the same line of the instructions.
-- Empty lines will not be considered
+- Empty lines will not be considered.
 
 ### How to write a test in config.txt
-- Enclose tests with `---`, no need to type 2 times `---` between tests
+- Enclose tests with `---`, no need to type 2 times `---` between tests.
 - Row [1] **required**: title of the test (no "" needed). Same naming between tests is permitted.
 	- Use `@` sign before name for testing code content (parsing) 
 		- With this option, the first argument in the   (`expect_equal(...)`,...) function will be replaced by the number of its occurences. 
 		- *Example* `expect_equal("return",3)` is `TRUE`, if the student code contains exactly three times the keyword `return`.
 		- *Note* keywords in comments do not count, in the above example `# Do not forget the return()` would (correctly) not count.
 - Row [2] **required** Test
-	- Type the testthat function (`expect_equal(...)`, ...) # put testthat doc
-		- Type the student variable name 
-		- Type the solution. Could be both R code, or variable name contained in `solution.R`. In the same solution it is possible to use both code and `solution.R` variables. 
-		- Type additional parameters for the function (precision)
+	- Type the testthat function (`expect_equal(...)`, ...). for reference, see https://testthat.r-lib.org/reference/index.html
+		- First argument: the student variable name 
+		- Second argument: the solution. Could be both R code, or variable name contained in `solution.R`. In the same solution it is possible to use both code and `solution.R` variables. 
+		- Type additional parameters for the testthat function (precision, etc)
 		- Example: `expect_equal(vec, vec_sol, tolerance = 1e-8, scale = vec_sol)`
-- Row [3] **required** score of the test. Will be normalized to have a sum of weights of 100.
+- Row [3] **required** score of the test. Will be normalized to have a sum of weights of 100. If the answer is correct, maximum score is given. 0 otherwise.
 - Row [4] **optional** negative (error) feedback. If no feedback is provided, R error message will be shown.
 - Row [5] **optional** positive (correct) feedback. If no feedback is provided, the message *Congratulations, the answer is correct!* will be displayed. 
 	- Individual positive feedback currently only works if also individual negative feedback has been provided. 
@@ -95,7 +95,7 @@ gradescope_assignment/
 
 ### Handling different errors
 - COMPILING: The grader outputs the code of the line that contains an error, and the R message.
-- NAMING: The grader recognizeS if the variable is not present and outputs a standardized message 
+- NAMING: The grader recognizes if the variable or function is not present and outputs a standardized message.
 - EVALUATION: The grader provides user-generated or R-generated feedback.
 
 
