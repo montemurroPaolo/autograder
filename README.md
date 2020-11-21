@@ -5,6 +5,7 @@ Authors: Peter Gruber (peter.gruber@usi.ch) and Paolo Montemurro (montep@usi.ch)
 #### V 1.6
 - **Improved output for different errors**:
 	- SYNTAX: The grader outputs a message, the line of the first syntax error and the R error message.
+	![syntax error example](syntax error.PNG)
 	- COMPILING: The grader outputs the code of the line that contains the error, and the R message
 	- NAMING: not changed
 	- EVALUATION: not changed
