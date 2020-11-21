@@ -2,11 +2,18 @@
 Authors: Peter Gruber (peter.gruber@usi.ch) and Paolo Montemurro (montep@usi.ch) started 2020-10-09.
 
 ## Versions:
+#### V 1.6
+- **Improved output for different errors**:
+	- SYNTAX: The grader outputs a message, the line of the first syntax error and the R error message.
+	- COMPILING: The grader outputs the code of the line that contains the error, and the R message
+	- NAMING: not changed
+	- EVALUATION: not changed
+- Improved output message format
 
 #### V 1.5
 - **Different output for different errors**:
-	- COMPILING: The grader outputs the code of the line that contains an error, and the R message
-	- NAMING: The grader recognizeS if the variable is not present and outputs a standardized message 
+	- COMPILING: The grader outputs the error message of the code that produced an error.
+	- NAMING: The grader recognizes if the variable requested is not present and outputs a standardized message 
 	- EVALUATION: The grader provides user-generated or R-generated feedback.
 - Created the function return_0_grade
 - 7 tests made. Stored in folder test submissions
