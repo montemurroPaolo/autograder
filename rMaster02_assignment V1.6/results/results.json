@@ -1,0 +1,1 @@
+{"tests":[{"name":"Code produces errors","score":0,"max_score":100,"visibility":"visible","output":"You committed a syntax error, and we couldn't evaluate the code.\nR reports the following message:\n\nError: ../submission/assignment02.R:48:4: unexpected symbol\n47:   if(TRUE){print(x)\n48:   }return\n       ^\n"}]}

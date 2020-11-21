@@ -46,12 +46,30 @@ calcGradesForGradescope <- function(submission_file, my_test_file, debug=FALSE){
   line_by_line   <- evaluate(file(submission_file))
   errors_bool    <- grepl("error", sapply(line_by_line, class))
   errors         <- line_by_line[errors_bool]
+  
+  # Line that created an error
+  error_code_bool <- errors_bool[-1] # Because code with error is always in the line before the error
+  code_of_errors  <- line_by_line[error_code_bool]
+  
   #warnings_bool  <- grepl("warning", sapply(line_by_line, class))
   #warnings <- replay(line_by_line[warnings_bool])
   
+
   if(length(errors)>0){ #if there is any error...
-    format_errors  <- ""
-    for(i in 1:length(errors)){ format_errors <- paste0(format_errors, errors[[i]]) } # Output errors
+    if(nchar(code_of_errors[[1]][1])>200){ # If R reports a very long code as a error, we have a syntax error. (possible to do it also with parsing the error message...)
+      format_errors <- paste0("You committed a syntax error, and we couldn't evaluate the code.\n",
+                              "R reports the following message:\n\n",  errors[[1]])
+    }else{
+      format_errors  <- ""
+      for(i in 1:length(errors)){ 
+        format_errors <- paste0(format_errors, 
+                                "The following script of your code produces compiling error: \n",
+                                separator,"\n",code_of_errors[[i]][[1]],"\n",separator,
+                                "\nError message:\n",
+                                errors[[i]],
+                                "\n\n",big_separator,"\n") 
+      }
+    } # Output complete error message
     output_0_grade("Code produces errors", format_errors, sep=.Platform$file.sep)
     stop("Code produces errors. results written")
   }

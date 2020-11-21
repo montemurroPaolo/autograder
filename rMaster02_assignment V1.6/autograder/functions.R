@@ -39,3 +39,6 @@ output_0_grade <- function(test_name, msge, sep){
   json_filename <- paste0("..",sep,"results",sep,"results.json")
   write(jsonlite::toJSON(tests, auto_unbox = T), file = json_filename)
 }
+
+separator     <- "---------------------------------------------"
+big_separator <- "============================================="

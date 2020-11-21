@@ -11,7 +11,7 @@ badFn <- function(x)
     {
     y <- x^2
     return(y)
-    }
+}
 
 blackScholesCall <- function (S,K,t,r,sigma)
 # blackScholes Price of a call option according to Black-Scholes
@@ -33,18 +33,19 @@ blackScholesCall <- function (S,K,t,r,sigma)
 
 
 dcinterest <- function(r,t) 
-# Calculates the discretely compounded interest on 1 Euro. 
-# INPUT	  r	1x1 .. interest rate [fractions of 1]
-#         t	1x1 .. duration in yrs
-# OUTPUT y  1x1 .. payoff
-# USAGE   dcinterest(r,t) 
-# peter.gruber@usi.ch, 2011-09-01
-    {
-    tFull <- floor(t)      # full years for re-investment
-    tFrac <- t-tFull       # fractional years, no re-investmetn 
-    y <- (1+r)^tFull       # Amount after tFull years
-    y <- y * (1+r*tFrac)   # Interest for the tFrac year
-    return(y)
-}
+  # Calculates the discretely compounded interest on 1 Euro. 
+  # INPUT	  r	1x1 .. interest rate [fractions of 1]
+  #         t	1x1 .. duration in yrs
+  # OUTPUT y  1x1 .. payoff
+  # USAGE   dcinterest(r,t) 
+  # peter.gruber@usi.ch, 2011-09-01
+{
+  tFull <- floor(t)      # full years for re-investment
+  tFrac <- t-tFull       # fractional years, no re-investmetn 
+  y <- (1+r)^tFull       # Amount after tFull years
+  y <- y * (1+r*tFrac)   # Interest for the tFrac year
 
+  return(y)
+  
+}
 
