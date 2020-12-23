@@ -1,0 +1,11 @@
+"","title","test","score","max_score","feedback_given"
+"1","Ex 1 - Using shortcuts","object_condition('badFn(5)', '==')","12.5","12.5","Congratulations, the answer is correct."
+"2","Ex 2 - Using R code (wrong answer)","submission$badFn(5) == solution$badFn(6)","0","12.5","R reports the following error(s): \n[1] FALSE
+"
+"3","Ex 3 - Keyword search","keyword_count('Peter', comments=TRUE)>0","12.5","12.5","Greeeat!"
+"4","Ex 4 - Keyword search, with comments","keyword_count(peter, comments=TRUE, case_sensitive=FALSE)>0","0","12.5","Your environment doesn't contain the variable/function requested. Check your naming."
+"5","Ex 5 - Does the object exist?","object_exists('badFn')","12.5","12.5","Congratulations, the answer is correct."
+"6","Ex 6 - Object that does not exist.","aaa == 5","0","12.5","Your environment doesn't contain the variable/function requested. Check your naming."
+"7","Ex 7 - Check_all","check_all('badFn(5)', tol=1, scale='solution$badFn(5)')","12.5","12.5","Congratulations, the answer is correct."
+"8","Ex 8 - Object_equal","object_equal('badFn(5)')","12.5","12.5","Congratulations, the answer is correct."
+"9","TOTAL SCORE","","62.5","100",""
