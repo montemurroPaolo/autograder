@@ -1,0 +1,147 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+
+<h2>Upload your assignment</h2>
+<hr>
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+
+<!-- ---------------------- UPLOAD FORM ---------------------- -->
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="file" name="myfile" />
+    <input type="submit" name="submit" value="Upload" />
+</form>
+
+
+<form id="upload" class="row" action="{% url 'compress' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="col-md-6">
+        <input type="hidden" name="user" />
+        <div class="form-group row">
+            <div class="col">
+                <label for="image">Choose image</label>
+                <input type="file" class="form-control form-control-file" accept="image/jpg, image/jpeg, .bmp"
+                    name="image" id="image" required style="padding-bottom: 36px;" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col">
+                <input type="number" class="form-control" name="F" placeholder="F = blocks size" required />
+            </div>
+            <div class="col">
+                <input type="number" class="form-control" name="d" placeholder="d = frequency treshold" required />
+            </div>
+        </div>
+        <input class="btn btn-primary" type="submit" value="Submit" />
+    </div>
+    <div class="col-md-6">
+        <img id="loading" src="https://loading.io/spinners/cutiefox/lg.cutie-fox-spinner.gif" width="180" style="display:none;" />
+    </div>
+    <br />
+    <hr>
+</form>
+
+
+<!-- ---------------------- HISTORY TABLE ---------------------- -->
+
+<style>
+    #user-images td {
+        text-align: center;
+    }
+
+    #user-images img {
+        max-width: 300px;
+        max-height: 280px;
+    }
+</style>
+
+<div class="col-md-4" style="margin:30px 0 150px 0;">
+    <h3>
+        Your images
+        <a id="delete-all" class="btn btn-sm btn-danger" role="button" href="#"
+            onclick="return confirm('Are you sure?');">Delete all</a>
+    </h3>
+    <table id="user-images" class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Original</th>
+                <th style="white-space:nowrap;">Greyscale</th>
+                <th>Compress</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+    <i>Click an image to see it bigger</i>
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        var user = setUser();
+        getUserImages(user);
+        $('#delete-all').attr('href', '/delete_all_for_user/' + user);
+
+        $('form#upload').submit(function (event) {
+            //event.preventDefault();
+            var F = $(event.target).find('[name=F]').val();
+            var d = $(event.target).find('[name=d]').val();
+            if (d < 0 || d > 2 * F - 2) {
+                alert('Frequency treshold (d) must be between 0 and 2F-2');
+                return false;
+            }
+            else{
+                $('#loading').show();
+                $('[type=submit]').attr('disabled', true);
+            }
+        });
+    });
+
+    function setUser() {
+        var user = window.localStorage.getItem('user');
+        if (!user) {
+            user = randomString();
+            window.localStorage.setItem('user', user);
+        }
+        $('[name=user]').val(user);
+        return user;
+    }
+
+    function getUserImages(user) {
+        $.ajax({
+                method: "GET",
+                url: "/get_user_images",
+                data: {
+                    user: user,
+                }
+            })
+            .done(function (response) {
+                $(response.images).each(function (index, element) {
+                    var original = '<td><a href="' + element.original + '" target="_blank"><img src="' +
+                        element.original + '"><a/></td>';
+                    var grey = '<td><a href="' + element.grey + '" target="_blank"><img src="' + element
+                        .grey + '"><a/></td>';
+                    var compress = '<td><a href="' + element.compress + '" target="_blank"><img src="' +
+                        element.compress + '"><a/></td>';
+                    var remove = '<td><a href="/delete_image/' + user + '/' + element.name +
+                        '" class="fa fa-trash text-danger"></a></td>';
+
+                    var tr = $('<tr>').append(original).append(grey).append(compress).append(remove);
+                    $('#user-images tbody').append(tr);
+                });
+            });
+    }
+
+    function randomString() {
+        // https://stackoverflow.com/questions/1349404/generate-random-string-characters-in-javascript
+        return Math.random().toString(36).substring(7);
+    }
+</script>
+
+{% endblock %}

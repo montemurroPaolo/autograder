@@ -1,0 +1,44 @@
+Ex 1 - Using shortcuts
+Test: object_condition('badFn(5)', '==')
+Score: 0/12.5
+Incorrect value for badFn(5)
+ 
+Ex 2 - Using R code (wrong answer)
+Test: submission$badFn(5) == solution$badFn(6)
+Score: 0/12.5
+R reports the following error(s): \nError in eval(expr, envir, enclos): attempt to apply non-function
+
+ 
+Ex 3 - Keyword search
+Test: keyword_count('Peter', comments=TRUE)>0
+Score: 0/12.5
+You didn't write Peter
+ 
+Ex 4 - Keyword search, with comments
+Test: keyword_count('peter', comments=TRUE, case_sensitive=FALSE)>0
+Score: 0/12.5
+Very bad
+ 
+Ex 5 - Does the object exist?
+Test: object_exists('badFn')
+Score: 0/12.5
+R reports the following error(s): \n[1] FALSE
+
+ 
+Ex 6 - Object that does not exist.
+Test: submission$aaa == 5
+Score: 0/12.5
+Your environment doesn't contain the variable/function requested. Check your naming.
+ 
+Ex 7 - Check_all
+Test: check_all('badFn(5)', tol=1, scale='solution$badFn(5)')
+Score: 0/12.5
+R reports the following error(s): \n[1] FALSE
+
+ 
+Ex 8 - Object_equal
+Test: object_equal('badFn(5)')
+Score: 0/12.5
+R reports the following error(s): \nError in eval(expr, envir, enclos): attempt to apply non-function
+
+ 
